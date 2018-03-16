@@ -2,7 +2,7 @@
 FROM php:7.1-fpm
 ARG TIMEZONE
 
-MAINTAINER Maxence POUTORD <maxence.poutord@gmail.com>
+LABEL author="Maxence POUTORD <maxence.poutord@gmail.com>"
 
 RUN apt-get update && apt-get install -y \
     openssl \
