@@ -39,7 +39,30 @@ services:
             - php
             - nginx
     node:
-        build:
-            context: node
+        image: "node:8"
+        user: "node"
+        working_dir: /var/www/node
+        environment:
+        - NODE_ENV=production
+        - PUBLIC_KEY=${PUBLIC_KEY}
+        - PRIVATE_KEY=${PRIVATE_KEY}
+        - MONGO_URI=${MONGO_URI}
+        - MONGO_DBNAME=${MONGO_DBNAME} 
+        - IP=${IP}
+
+        volumes:
+        - ${NODE_APP_PATH}:/var/www/node
+        depends_on:
+        - mongo
+
+        links:
+        - mongo:mongo
+
+
+
+        expose:
+        - "8080"
+        command: "npm start"
+
     mongo:
         image: mongo
